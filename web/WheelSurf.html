@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>抽奖转盘</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+*{
+	margin: 0;
+	padding: 0;
+}
+	#zhuanpan{
+		background: red;
+		width: 350px;
+		height: 350px;
+		border-radius: 50%;
+		position: relative;
+		margin: 0 auto;
+		overflow: hidden;
+		transform: rotate(0deg);
+	}
+	.award{
+		width: 0;
+		height: 0;
+		border-bottom: 173.3px solid yellow;
+		border-left: 100px solid transparent;
+		border-right: 100px solid transparent;
+		border-radius:0 0 100px 100px;
+		position: absolute;
+		left:75px;
+		top: 173px;
+		line-height: 50px;
+	}
+	.award:first-child{
+		transform-origin: 50% 0;
+		transform: rotate(60deg);
+		line-height: 30px;
+		border-bottom: 173.3px solid #EF09CC;
+	}
+	.award:nth-child(2){
+		transform-origin: 50% 0;
+		transform: rotate(120deg);
+	}
+	.award:nth-child(3){
+		transform-origin: 50% 0;
+		transform: rotate(180deg);
+		border-bottom: 173.3px solid #EF09CC;
+	}
+	.award:nth-child(4){
+		transform-origin: 50% 0;
+		transform: rotate(240deg);
+	}
+	.award:nth-child(5){
+		transform-origin: 50% 0;
+		transform: rotate(300deg);
+		border-bottom: 173.3px solid #EF09CC;
+	}
+	.award:nth-child(6){
+		transform-origin: 50% 0;
+		transform: rotate(0deg);
+	}
+	#point{
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background:red;
+		position: relative;
+		left: 790px;
+		top: -185px;
+		cursor: pointer;
+	}
+	#point:before{
+		content: "";
+		display: block;
+		width: 0;
+		height: 0;
+		border-top:20px solid red;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		position: absolute;
+		top: 10px;
+		left: 0px;
+	}
+</style>
+</head>
+<body>
+    <div id="zhuanpan">
+    	<div class="award">*一等奖</div>
+    	<div class="award">二等奖</div>
+    	<div class="award">三等奖</div>
+    	<div class="award">四等奖</div>
+    	<div class="award">五等奖</div>
+    	<div class="award">未中奖</div>
+    </div>
+    <div id="point"></div>
+    <script type="text/javascript">
+    	var tostart=document.getElementById("point");
+    	var zhuan=document.getElementById("zhuanpan");
+    	var endquan,quan;
+    	tostart.onclick=function(){
+   		var time=setInterval(function(){
+    			quan=(Math.random()*15+5)*3600;
+    			zhuan.style.transform="rotate("+quan+"deg)";
+    			//22000是quan的一个随机数字，是一个概率较低的数字，确保转圈效果
+    			if(quan<22000){
+    				endquan=Math.floor(quan%360);
+    				console.log(endquan);
+    				//13是一开始指针的偏移角度，60是平均角度
+    				if(endquan<73){
+    					console.log("五等奖");
+    				}
+    				if(73<endquan&&endquan<13+60*2){
+    					console.log("四等奖");
+    				}
+    				if(13+60*2<endquan&&endquan<13+60*3){
+    					console.log("三等奖");
+    				}
+    				if(13+60*3<endquan&&endquan<13+60*4){
+    					console.log("二等奖");
+    				}
+    				if(13+60*4<endquan&&endquan<13+60*5){
+    					console.log("一等奖");
+    				}if(13+60*5<endquan&&endquan<13+60*6){console.log("未中奖")}
+    				clearInterval(time);
+    			}
+    		},400);
+    	}
+    </script>
+</body>
+</html>
