@@ -5,5 +5,5 @@
 这是一个转盘抽奖的页面，很粗糙。
 - weixinapp
 这是一个微信小程序，client里面的是前端页面，php里面是php后台接口，数据库按照php文件里面创建字段，并且要修改php接口连接数据库的信息。<br>
-![image](https://github.com/Mafia001/web-practice/blob/master/weixinapp/img/%E7%AD%BE%E5%88%B0.png)<br>
+![image](https://github.com/Mafia001/web-practice/blob/master/weixinapp/img/%E7%AD%BE%E5%88%B0.png)
 ![image](https://github.com/Mafia001/web-practice/blob/master/weixinapp/img/%E7%AD%BE%E5%88%B0%E5%90%8E.png)
