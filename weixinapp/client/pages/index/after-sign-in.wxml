@@ -1,0 +1,3 @@
+<view class="success-sign-in">
+<text id='luckynumber'>{{LuckyNumber}}</text>
+</view>

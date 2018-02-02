@@ -1,0 +1,44 @@
+/* pages/index/sign-in.wxss */
+page{
+  background-image: url(http://pic.ibaotu.com/00/48/37/63Y888piCfba.jpg-0.jpg!ww700);
+  background-size:100% 100%; 
+}
+.sign-in{
+  width:500rpx;
+  height:900rpx;
+  overflow: hidden;
+  margin:60rpx auto 0;
+}
+.sign-in-top{
+  background:#07a1ff;
+  text-align: center;
+}
+.sign-in-top text{
+  color: #fff;
+}
+.sign-in-top-big{
+  font-size: 50rpx;
+}
+form input{
+  width: 450rpx;
+  border:1rpx solid #ddd;
+  height:70rpx;
+  margin: 50rpx auto 0; 
+  padding-left:20rpx;
+  color: #ddd;
+}
+.notive{
+  width: 450rpx;
+  margin:50rpx auto 0;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  color: red;
+}
+.sign-in button{
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #07a1ff;
+  margin-top: 80rpx;
+  color: #fff;
+}
