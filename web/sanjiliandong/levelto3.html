@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>三级联动</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+.something{
+	padding:27px 0 0 43px; 
+}
+.something ul{
+	list-style: none;
+	color: #666666;
+	font-size: 16px;
+}
+.something ul li{
+	height: 50px;
+}
+.something ul li input{
+	width: 265px;
+	height: 30px;
+	padding-left:5px;
+	color: #666666;
+	font-size: 16px; 
+}
+.something ul li select{
+	width: 100px;
+	height: 30px;
+	color: #666666;
+	font-size: 16px;
+	padding-left: 5px;
+}
+.something-submit{
+	margin-top: 51px;
+}
+.something-submit input,.something-submit a{
+	display: inline-block;
+	width: 200px;
+	height: 35px;
+	text-align: center;
+	font-size: 16px;
+	color: #ffffff;
+	background: #eb4a66;
+	border: 1px solid #eb4a66;
+	line-height: 35px;
+	border-radius:5px;
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+    <div class="levelto3">
+    	<div class="something">
+    		<form>
+    			<ul>
+    				<li>
+    					<label>银行地区：</label>
+    					<select id="province" name="privince">
+    						<option>所在省份</option>
+    					</select>
+    					<select id="city" name="city">
+    						<option>所在城市</option>
+    					</select>
+    					<select id="area" name="area">
+    						<option>所在地区</option>
+    					</select>
+    				</li>
+    			</ul>
+    			<div class="something-submit">
+    				<input type="submit" value="确定">
+    				<a href="javascript:window.history.back()">返回</a>
+    			</div>
+    		</form>
+    	</div>
+    </div>
+    <script src="jquery-1.11.3.min.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            getprovince();
+            getcity();
+            getarea();
+        });
+        var privinceoption,cityoption,areaoption;
+        function getprovince(){
+            $.ajax({
+                url: 'http://localhost/test/3level.php?area=province',
+                type: 'GET',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                    for(var i=0;i<data.length;i++){
+                        privinceoption+="<option value="+data[i].provinceid+">"+data[i].province+"</option>"
+                    }
+                    $("#province").append(privinceoption);
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+            
+        }
+        function getcity(){
+            $("#province").change(function(event) {
+            $("#city").empty();
+            cityoption="<option value='0'>请选择</option>";
+            var provinceid=$('#province').val();
+            console.log(provinceid)
+            $.ajax({
+                url:"http://localhost/test/3level.php?id="+provinceid+"&&area=cities",
+                type: 'GET',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                for(var i=0;i<data.length;i++){
+                    cityoption+="<option value="+data[i].cityid+">"+data[i].city+"</option>"
+                }
+                $("#city").append(cityoption);
+
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+        });   
+        }
+        function getarea(){
+            $("#province,#city").change(function(event) {
+            $("#area").empty();
+            cityoption="<option value='0'>请选择</option>";
+            areaoption="<option value='0'>请选择</option>";
+            var cityid=$('#city').val();
+            console.log(cityid);
+            $.ajax({
+                url:"http://localhost/test/3level.php?id="+cityid+"&&area=areas",
+                type: 'GET',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                for(var i=0;i<data.length;i++){
+                    areaoption+="<option value="+data[i].areaid+">"+data[i].area+"</option>"
+                }
+                console.log(areaoption);
+                $("#area").append(areaoption);
+
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+        });   
+        }
+    </script>
+</body>
+</html>
